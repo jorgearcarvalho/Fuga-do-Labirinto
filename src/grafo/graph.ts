@@ -2,9 +2,11 @@ import { movimentar, validarCaminho } from "../api-labirinto/methods";
 
 export class Grafo {
   private arranjoVertices: Map<number, number[]>;
+  public v_final: number;
 
   constructor() {
     this.arranjoVertices = new Map();
+    this.v_final = 0;
   }
 
   // Adiciona um novo vertice no grafo
@@ -40,7 +42,8 @@ export class Grafo {
 
   // Se vertice Final, printa
   if(vertice_atual.final === true) { 
-    console.log('\nAchei! A saída está no vertice: ', vertice_atual.pos_atual); 
+    console.log('\nAchei um caminho! A saída está no vertice: ', vertice_atual.pos_atual);
+    this.v_final = vertice_atual.pos_atual;
     return {c}; 
   };
 
@@ -62,7 +65,7 @@ export class Grafo {
 
   // Não tive habilidade para desenvolver um BFS que fosse capaz de realizar os movimentos de busca
   // nos filhos dos vértices filhos.
-  
+  /* 
   async BFS(maze: string, vertice: Vertx, inicio: boolean){
     const visitados: Set<number> = new Set();
     visitados.add(vertice.pos_atual);
@@ -138,5 +141,5 @@ export class Grafo {
       console.log("Lista dos pais: ", listaPais)
   }
 
- 
+ */
 }
