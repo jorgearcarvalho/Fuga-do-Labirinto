@@ -31,32 +31,36 @@ async function main() {
 
         console.log('\nProcurando a saída do labirinto', maze, '\n.\n..\n...')
 
-        let caminho0: number[] = [8]; 
-        const primeiro_resultado = await labirinto.DFS(maze, verticeInicial.movimentos[0], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho0);
+        let melhorCaminho: Array<number> = [];
+        for (let k = 0; k < verticeInicial.movimentos.length; k++)
+        {
+            if (k === 0) 
+            {
+                const caminho: Array<number> = [verticeInicial.pos_atual];
+                const resultado = await labirinto.DFS(maze, verticeInicial.movimentos[k], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho);
 
-        console.log('\nCaminho 1: ', primeiro_resultado.c, ' Tamanho: ', primeiro_resultado.c.length),'\n';
+                while (resultado.c. length > 0 && resultado.c[resultado.c.length - 1] !== labirinto.v_final)
+                {
+                    resultado.c.pop();
+                }
 
+                console.log(`Caminho ${k}: ${resultado.c} Tamanho: ${resultado.c.length}`);
+            }
+            else {
+                await iniciar({id: 'teste' , labirinto: maze});
+                visitados_DFS = new Set();
 
-        let caminho1: number[] = [8];
-        await iniciar({id: 'teste' , labirinto: maze});
-        visitados_DFS = new Set();
-        const segundo_resultado = await labirinto.DFS(maze, verticeInicial.movimentos[1], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho1);
-        console.log('\nCaminho 2: ', segundo_resultado.c, ' Tamanho: ', segundo_resultado.c.length,);
+                const caminho: Array<number> = [verticeInicial.pos_atual];
+                const resultado = await labirinto.DFS(maze, verticeInicial.movimentos[k], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho);
+            
+                while (resultado.c[resultado.c.length - 1] !== labirinto.v_final)
+                {
+                    resultado.c.pop();
+                }
 
-
-        let caminho2: number[] = [8];
-        await iniciar({id: 'teste' , labirinto: maze});
-        visitados_DFS = new Set();
-        const terceiro_resultado = await labirinto.DFS(maze, verticeInicial.movimentos[2], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho2);
-        console.log('\nCaminho 3: ', terceiro_resultado.c, ' Tamanho: ', terceiro_resultado.c.length,);
-
-
-        let caminho3: number[] = [8];
-        await iniciar({id: 'teste' , labirinto: maze});
-        visitados_DFS = new Set();
-        const quarto_resultado = await labirinto.DFS(maze, verticeInicial.movimentos[3], verticeInicial.pos_atual, verticeInicial.inicio, visitados_DFS, caminho3);
-
-        console.log('\nCaminho 4: ', quarto_resultado.c, ' Tamanho: ', quarto_resultado.c.length,'\n');
+                console.log(`Caminho ${k}: ${resultado.c} Tamanho: ${resultado.c.length}`);
+            }
+        }
         
         process.exit();
     } 
@@ -67,7 +71,6 @@ async function main() {
 };
 
 main();
-
 
 
 function escolheLabirinto(): Promise<string> {
@@ -88,5 +91,3 @@ function escolheLabirinto(): Promise<string> {
         });
     });
 }
-
-
